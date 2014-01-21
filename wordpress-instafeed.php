@@ -3,7 +3,7 @@
 Plugin Name: WordPress Instafeed
 Plugin URI: https://github.com/bjornjohansen/WordPress-Instafeed
 Description: Stream of photos from Instagram on your WordPress site
-Version: 0.1
+Version: 0.1.1
 Author: Leidar
 Author URI: http://twitter.com/leidar
 Text Domain: wp-instafeed
@@ -30,7 +30,7 @@ require_once 'widget.php';
 
 class WordPress_InstaFeed {
 
-	const VERSION = '0.1';
+	const VERSION = '0.1.1';
 	const CLIENT_ID = '6409bc9c964348899c3ae1b9091965b9';
 
 	function __construct() {
@@ -70,92 +70,66 @@ class WordPress_InstaFeed {
 
 			echo '<ul>';
 		}
-		
 
 		exit;
 
 	}
 
-	function get_tag_stream( $tag ) {
-		$url = add_query_arg( array( 'client_id' => self::CLIENT_ID ), sprintf( 'https://api.instagram.com/v1/tags/%s/media/recent', $tag ) );
+	function get_stream( $url ) {
+		$ret = array();
 
-		$response = wp_remote_get( $url, $this->remote_get_args() );
+		$transient_key = 'wpinstfd' . md5( $url );
 
-		if ( is_wp_error( $response ) ) {
-			$error_message = $response->get_error_message();
-			echo "Something went wrong: $error_message";
-		}
+		if ( false === ( $ret = get_transient( $transient_key ) ) ) {
 
-		$stuff = json_decode( wp_remote_retrieve_body( $response ) );
-		$return = array();
+			$ret = array();
 
-		if ( isset( $stuff->data ) ) {
-			foreach ( $stuff->data as $item ) {
-				$current = new stdClass();
-				$current->link = $item->link;
-				$current->thumbnail = $item->images->thumbnail->url;
-				if ( isset( $item->caption->text ) ) {
-					$current->caption = $item->caption->text;
-				} else {
-					$current->caption = '';
+			$response = wp_remote_get( $url, $this->remote_get_args() );
+
+			if ( ! is_wp_error( $response ) ) {
+				$tuff = json_decode( wp_remote_retrieve_body( $response ) );
+				if ( isset( $tuff->data ) ) {
+					foreach ( $tuff->data as $item ) {
+						$current = new stdClass();
+						$current->link = $item->link;
+						$current->thumbnail = $item->images->thumbnail->url;
+						/* Found bug in WP transient API. Need workaround. Skip captions for now */
+						if ( false && isset( $item->caption->text ) ) {
+							$current->caption = esc_html( $item->caption->text );
+						} else {
+							$current->caption = '';
+						}
+						
+						// Scheme-relative urls
+						$current->thumbnail = str_replace( 'http://', '//', $current->thumbnail );
+
+						$ret[] = $current;
+					}
+					set_transient( $transient_key, $ret, 3600 );
 				}
-				
-				if ( is_ssl() ) {
-					$current->thumbnail = str_replace( 'http://', 'https://', $current->thumbnail );
-				}
-
-				$return[] = $current;
 			}
 		}
-		return $return;
+
+		return $ret;
+	}
+
+	function get_tag_stream( $tag ) {
+		$url = add_query_arg( array( 'client_id' => self::CLIENT_ID ), sprintf( 'https://api.instagram.com/v1/tags/%s/media/recent', $tag ) );
+		$ret = $this->get_stream( $url );
+		return $ret;
 	}
 
 	function get_user_stream( $username ) {
 		$userdata = $this->userdata_from_username( $username );
 
-		$return = array();
+		$ret = array();
 
 		if ( count( $userdata ) ) {
-
 			$url = add_query_arg( array( 'client_id' => self::CLIENT_ID ), sprintf( 'https://api.instagram.com/v1/users/%s/media/recent/', $userdata->id ) );
-
-			$transient_key = 'wpinstfd' . md5( $url );
-
-			if ( false === ( $return = get_transient( $transient_key ) ) ) {
-
-				$tream = array();
-
-				$response = wp_remote_get( $url, $this->remote_get_args() );
-
-				if ( ! is_wp_error( $response ) ) {
-					$tuff = json_decode( wp_remote_retrieve_body( $response ) );
-					if ( isset( $tuff->data ) ) {
-						foreach ( $tuff->data as $item ) {
-							$current = new stdClass();
-							$current->link = $item->link;
-							$current->thumbnail = $item->images->thumbnail->url;
-							if ( isset( $item->caption->text ) ) {
-								$current->caption = $item->caption->text;
-							} else {
-								$current->caption = '';
-							}
-							
-							if ( is_ssl() ) {
-								$current->thumbnail = str_replace( 'http://', 'https://', $current->thumbnail );
-							}
-
-							$tream[] = $current;
-						}
-					}
-				}
-
-				$return = $tream;
-				set_transient( $transient_key, $return, 3600 );
-			}
-
+			$ret = $this->get_stream( $url );
 		}
 
-		return $return;
+		return $ret;
 	}
 
 	function userdata_from_username( $username ) {
