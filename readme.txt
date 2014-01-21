@@ -16,6 +16,8 @@ Fetches the latest instagrams from either a specified Instagram username or a ta
 
 Works on https.
 
+No CSS provided (yet). Do what you want, create a slider, gallery, whatever …
+
 
 == Installation ==
 1. Download plugin
@@ -28,6 +30,7 @@ Works on https.
 * User feed works
 * Caching results
 * Scheme-relative image URLs
+* Added POT and translation for nb_NO
 
 = Version 0.1 =
 * Created 2014-01-21
