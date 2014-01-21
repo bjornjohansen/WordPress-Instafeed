@@ -25,6 +25,6 @@ Works on https.
 == Changelog ==
 
 = Version 0.1 =
-* Created 2013-12-04
-* User timeline works
+* Created 2014-01-21
+* Tag feed works
 
