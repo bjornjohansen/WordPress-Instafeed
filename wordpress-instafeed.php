@@ -5,7 +5,7 @@ Plugin URI: https://github.com/bjornjohansen/WordPress-Instafeed
 Description: Stream of photos from Instagram on your WordPress site
 Version: 0.1.1
 Author: Leidar
-Author URI: http://twitter.com/leidar
+Author URI: http://leidar.com/
 Text Domain: wp-instafeed
 License: GPL2
 
@@ -37,11 +37,16 @@ class WordPress_InstaFeed {
 		add_action( 'wp_ajax_wp_instafeed_widgetcontent', array( $this, 'widgetcontent_callback' ) );
 		add_action( 'wp_ajax_nopriv_wp_instafeed_widgetcontent', array( $this, 'widgetcontent_callback' ) );
 		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'plugins_loaded', array( $this, 'load_translation' ) );
 	}
 
 	function init() {
 		wp_enqueue_script( 'wp_instafeed_widget', plugins_url( '/js/wp_instafeed_widget.js' , __FILE__ ), array( 'jquery' ), filemtime( dirname( __FILE__ ) . '/js/wp_instafeed_widget.js' ), true );
 		wp_localize_script( 'wp_instafeed_widget', 'wp_instafeed', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+	}
+
+	function load_translation() {
+		load_plugin_textdomain( 'wp-instafeed', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 	}
 
 	function widgetcontent_callback () {

@@ -1,0 +1,43 @@
+# Copyright (C) 2014 WordPress Instafeed
+# This file is distributed under the same license as the WordPress Instafeed package.
+msgid ""
+msgstr ""
+"Project-Id-Version: WordPress Instafeed 0.1.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wordpress-instafeed\n"
+"POT-Creation-Date: 2014-01-21 21:13:16+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2014-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+
+#: widget.php:16
+msgid "Stream of photos from Instagram"
+msgstr ""
+
+#: widget.php:33
+msgid "Please configure the WordPress InstaFeed widget"
+msgstr ""
+
+#: widget.php:53
+msgid "Title:"
+msgstr ""
+
+#: widget.php:57
+msgid "Username or tag:"
+msgstr ""
+
+#: widget.php:59
+msgid "Input \"username\" or \"#tag\""
+msgstr ""
+
+#: widget.php:62
+msgid "Number of entries to show:"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Stream of photos from Instagram on your WordPress site"
+msgstr ""
+

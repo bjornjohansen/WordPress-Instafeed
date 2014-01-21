@@ -2,7 +2,7 @@
 Contributors: bjornjohansen, toringe
 Donate link: http://www.kiva.org
 Tags: instagram, widget, jquery
-Author URI: https://leidar.no/
+Author URI: https://leidar.com/
 Requires at least: 3.5
 Stable tag: 0.1.1
 Tested up to: 3.8
