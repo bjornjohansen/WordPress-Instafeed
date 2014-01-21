@@ -16,7 +16,7 @@ Fetch and display the latest Instagrams from either a specified Instagram userna
 
 * Really easy to configure widget
 * No OAuth required
-* Works on HTPPS.
+* Works on HTTPS.
 * No CSS provided (yet). Do what you want, create a slider, lightbox gallery, whatever …
 * Optimized for full page caching. Widget content is fetched via an AJAX GET request for easy cache tuning.
 * Results from Instagram is cached for fast loading
