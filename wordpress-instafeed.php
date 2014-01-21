@@ -111,7 +111,76 @@ class WordPress_InstaFeed {
 	}
 
 	function get_user_stream( $username ) {
+		$userdata = $this->userdata_from_username( $username );
 
+		$return = array();
+
+		if ( count( $userdata ) ) {
+
+			$url = add_query_arg( array( 'client_id' => self::CLIENT_ID ), sprintf( 'https://api.instagram.com/v1/users/%s/media/recent/', $userdata->id ) );
+
+			$transient_key = 'wpinstfd' . md5( $url );
+
+			if ( false === ( $return = get_transient( $transient_key ) ) ) {
+
+				$tream = array();
+
+				$response = wp_remote_get( $url, $this->remote_get_args() );
+
+				if ( ! is_wp_error( $response ) ) {
+					$tuff = json_decode( wp_remote_retrieve_body( $response ) );
+					if ( isset( $tuff->data ) ) {
+						foreach ( $tuff->data as $item ) {
+							$current = new stdClass();
+							$current->link = $item->link;
+							$current->thumbnail = $item->images->thumbnail->url;
+							if ( isset( $item->caption->text ) ) {
+								$current->caption = $item->caption->text;
+							} else {
+								$current->caption = '';
+							}
+							
+							if ( is_ssl() ) {
+								$current->thumbnail = str_replace( 'http://', 'https://', $current->thumbnail );
+							}
+
+							$tream[] = $current;
+						}
+					}
+				}
+
+				$return = $tream;
+				set_transient( $transient_key, $return, 3600 );
+			}
+
+		}
+
+		return $return;
+	}
+
+	function userdata_from_username( $username ) {
+
+		$url = add_query_arg( array( 'q' => $username, 'client_id' => self::CLIENT_ID ), 'https://api.instagram.com/v1/users/search' );
+
+		$transient_key = 'wpinstfd' . md5( $url );
+
+		if ( false === ( $return = get_transient( $transient_key ) ) ) {
+
+			$response = wp_remote_get( $url, $this->remote_get_args() );
+
+			if ( is_wp_error( $response ) ) {
+				$return = $response;
+			} else {
+				$omething = json_decode( wp_remote_retrieve_body( $response ) );
+				if ( isset( $omething->data ) && count( $omething->data) ) {
+					$return = $omething->data[0];
+
+					set_transient( $transient_key, $return, 86400 );
+				}
+			}
+		}
+
+		return $return;
 	}
 
 	function remote_get_args() {
