@@ -12,11 +12,15 @@ Stream of photos from Instagram on your WordPress site
 
 == Description ==
 
-Fetches the latest instagrams from either a specified Instagram username or a tag.
+Fetch and display the latest Instagrams from either a specified Instagram username or a tag.
 
-Works on https.
-
-No CSS provided (yet). Do what you want, create a slider, gallery, whatever …
+* Really easy to configure widget
+* No OAuth required
+* Works on HTPPS.
+* No CSS provided (yet). Do what you want, create a slider, lightbox gallery, whatever …
+* Optimized for full page caching. Widget content is fetched via an AJAX GET request for easy cache tuning.
+* Results from Instagram is cached for fast loading
+* i18n ready. POT file and nb_NO translation included
 
 
 == Installation ==
