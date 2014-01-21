@@ -1,5 +1,5 @@
 === WordPress Instafeed ===
-Contributors: bjornjohansen, joakimandersen
+Contributors: bjornjohansen, toringe
 Donate link: http://www.kiva.org
 Tags: instagram, widget, jquery
 Author URI: https://leidar.no/
