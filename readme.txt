@@ -24,7 +24,7 @@ Works on https.
 
 == Changelog ==
 
-= Version 0.1 =
+= Version 0.1.1 =
 * User feed works
 * Caching results
 * Scheme-relative image URLs
