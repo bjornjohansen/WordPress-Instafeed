@@ -11,7 +11,7 @@
 			"url": wp_instafeed.ajaxurl,
 			"data": data,
 			"success": function( data ) {
-				$el.html( data );
+				$el.append( data );
 			},
 			"dataType": "html"
 		});
