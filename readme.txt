@@ -31,6 +31,7 @@ No CSS provided (yet). Do what you want, create a slider, gallery, whatever …
 * Caching results
 * Scheme-relative image URLs
 * Added POT and translation for nb_NO
+* Minified JS
 
 = Version 0.1 =
 * Created 2014-01-21

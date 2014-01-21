@@ -41,7 +41,8 @@ class WordPress_InstaFeed {
 	}
 
 	function init() {
-		wp_enqueue_script( 'wp_instafeed_widget', plugins_url( '/js/wp_instafeed_widget.js' , __FILE__ ), array( 'jquery' ), filemtime( dirname( __FILE__ ) . '/js/wp_instafeed_widget.js' ), true );
+		$jsfile = ( ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? 'wp_instafeed_widget.js' : 'wp_instafeed_widget.min.js' );
+		wp_enqueue_script( 'wp_instafeed_widget', plugins_url( '/js/' . $jsfile , __FILE__ ), array( 'jquery' ), filemtime( dirname( __FILE__ ) . '/js/' . $jsfile ), true );
 		wp_localize_script( 'wp_instafeed_widget', 'wp_instafeed', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 	}
 
