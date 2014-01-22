@@ -4,7 +4,7 @@ Donate link: http://www.kiva.org
 Tags: instagram, widget, jquery
 Author URI: https://leidar.com/
 Requires at least: 3.5
-Stable tag: 0.1.1
+Stable tag: 0.1.2
 Tested up to: 3.8
 License: GPLv2
 
@@ -29,6 +29,10 @@ Fetch and display the latest Instagrams from either a specified Instagram userna
 3. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Changelog ==
+
+= Version 0.1.2 =
+* Added client side caching with localStorage
+* Added filters for modifying cache times
 
 = Version 0.1.1 =
 * User feed works

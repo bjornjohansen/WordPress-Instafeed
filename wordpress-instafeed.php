@@ -3,7 +3,7 @@
 Plugin Name: WordPress Instafeed
 Plugin URI: https://github.com/bjornjohansen/WordPress-Instafeed
 Description: Stream of photos from Instagram on your WordPress site
-Version: 0.1.1
+Version: 0.1.2
 Author: Leidar
 Author URI: http://leidar.com/
 Text Domain: wp-instafeed
@@ -30,8 +30,12 @@ require_once 'widget.php';
 
 class WordPress_InstaFeed {
 
-	const VERSION = '0.1.1';
+	const VERSION = '0.1.2';
 	const CLIENT_ID = '6409bc9c964348899c3ae1b9091965b9';
+
+	const DEFAULT_CLIENT_CACHETIME = 600;
+	const DEFAULT_STREAM_CACHETIME = 3600;
+	const DEFAULT_USERDATA_CACHETIME = 86400;
 
 	function __construct() {
 		add_action( 'wp_ajax_wp_instafeed_widgetcontent', array( $this, 'widgetcontent_callback' ) );
@@ -43,7 +47,10 @@ class WordPress_InstaFeed {
 	function init() {
 		$jsfile = ( ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? 'wp_instafeed_widget.js' : 'wp_instafeed_widget.min.js' );
 		wp_enqueue_script( 'wp_instafeed_widget', plugins_url( '/js/' . $jsfile , __FILE__ ), array( 'jquery' ), filemtime( dirname( __FILE__ ) . '/js/' . $jsfile ), true );
-		wp_localize_script( 'wp_instafeed_widget', 'wp_instafeed', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
+		wp_localize_script( 'wp_instafeed_widget', 'wp_instafeed', array( 
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'client_cachetime' => apply_filters( 'wp_instafeed_client_cachetime', self::DEFAULT_CLIENT_CACHETIME ),
+		) );
 	}
 
 	function load_translation() {
@@ -111,7 +118,7 @@ class WordPress_InstaFeed {
 
 						$ret[] = $current;
 					}
-					set_transient( $transient_key, $ret, 3600 );
+					set_transient( $transient_key, $ret, apply_filter( 'wp_instafeed_stream_cachetime', self::DEFAULT_STREAM_CACHETIME  ) );
 				}
 			}
 		}
@@ -155,7 +162,7 @@ class WordPress_InstaFeed {
 				if ( isset( $omething->data ) && count( $omething->data) ) {
 					$return = $omething->data[0];
 
-					set_transient( $transient_key, $return, 86400 );
+					set_transient( $transient_key, $return, apply_filters( 'wp_instafeed_userdata_cachetime', self::DEFAULT_USERDATA_CACHETIME ) );
 				}
 			}
 		}
