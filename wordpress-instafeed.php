@@ -118,7 +118,7 @@ class WordPress_InstaFeed {
 
 						$ret[] = $current;
 					}
-					set_transient( $transient_key, $ret, apply_filter( 'wp_instafeed_stream_cachetime', self::DEFAULT_STREAM_CACHETIME  ) );
+					set_transient( $transient_key, $ret, apply_filters( 'wp_instafeed_stream_cachetime', self::DEFAULT_STREAM_CACHETIME  ) );
 				}
 			}
 		}
