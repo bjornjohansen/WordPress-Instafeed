@@ -29,6 +29,12 @@ Fetch and display the latest Instagrams from either a specified Instagram userna
 2. Upload the plugin through the 'Plugins' > 'Add new' > 'Upload' page in WordPress,
 3. Activate the plugin through the 'Plugins' menu in WordPress.
 
+== Screenshots ==
+
+1. Widget settings
+2. Widget output (in the twentytwelve theme)
+3. HTML output
+
 == Changelog ==
 
 = Version 0.1.2 =
