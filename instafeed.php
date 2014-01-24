@@ -1,12 +1,12 @@
 <?php
 /*
-Plugin Name: WordPress Instafeed
+Plugin Name: Instafeed
 Plugin URI: https://github.com/bjornjohansen/WordPress-Instafeed
 Description: Stream of photos from Instagram on your WordPress site
 Version: 0.1.2
 Author: Leidar
 Author URI: http://leidar.com/
-Text Domain: wp-instafeed
+Text Domain: instafeed
 License: GPL2
 
     Copyright 2014  Leidar  (email : teknisk@leidar.no)
@@ -28,7 +28,7 @@ License: GPL2
 
 require_once 'widget.php';
 
-class WordPress_InstaFeed {
+class Instafeed {
 
 	const VERSION = '0.1.2';
 	const CLIENT_ID = '6409bc9c964348899c3ae1b9091965b9';
@@ -38,18 +38,18 @@ class WordPress_InstaFeed {
 	const DEFAULT_USERDATA_CACHETIME = 86400;
 
 	function __construct() {
-		add_action( 'wp_ajax_wp_instafeed_widgetcontent', array( $this, 'widgetcontent_callback' ) );
-		add_action( 'wp_ajax_nopriv_wp_instafeed_widgetcontent', array( $this, 'widgetcontent_callback' ) );
+		add_action( 'wp_ajax_instafeed_widgetcontent', array( $this, 'widgetcontent_callback' ) );
+		add_action( 'wp_ajax_nopriv_instafeed_widgetcontent', array( $this, 'widgetcontent_callback' ) );
 		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'plugins_loaded', array( $this, 'load_translation' ) );
 	}
 
 	function init() {
-		$jsfile = ( ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? 'wp_instafeed_widget.js' : 'wp_instafeed_widget.min.js' );
-		wp_enqueue_script( 'wp_instafeed_widget', plugins_url( '/js/' . $jsfile , __FILE__ ), array( 'jquery' ), filemtime( dirname( __FILE__ ) . '/js/' . $jsfile ), true );
-		wp_localize_script( 'wp_instafeed_widget', 'wp_instafeed', array( 
+		$jsfile = ( ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? 'instafeed_widget.js' : 'instafeed_widget.min.js' );
+		wp_enqueue_script( 'instafeed_widget', plugins_url( '/js/' . $jsfile , __FILE__ ), array( 'jquery' ), filemtime( dirname( __FILE__ ) . '/js/' . $jsfile ), true );
+		wp_localize_script( 'instafeed_widget', 'instafeed', array( 
 			'ajaxurl' => admin_url( 'admin-ajax.php' ),
-			'client_cachetime' => apply_filters( 'wp_instafeed_client_cachetime', self::DEFAULT_CLIENT_CACHETIME ),
+			'client_cachetime' => apply_filters( 'instafeed_client_cachetime', self::DEFAULT_CLIENT_CACHETIME ),
 		) );
 	}
 
@@ -73,11 +73,11 @@ class WordPress_InstaFeed {
 
 		if ( count( $list ) ) {
 
-			echo '<ul class="wp_instafeed_widget_list">';
+			echo '<ul class="instafeed_widget_list">';
 
 			for ( $i = 0, $c = min( $widget_options[ 'num_entries' ], count( $list ) ); $i < $c; $i++ ) {
-				echo '<li class="wp_instafeed_widget_list_item">';
-				echo sprintf( '<a href="%s" target="_blank" class="wp_instafeed_widget_list_item_link"><img src="%s" alt="%s"></a>', esc_url( $list[$i]->link ), esc_url( $list[$i]->thumbnail ), esc_attr( $list[$i]->caption ) );
+				echo '<li class="instafeed_widget_list_item">';
+				echo sprintf( '<a href="%s" target="_blank" class="instafeed_widget_list_item_link"><img src="%s" alt="%s"></a>', esc_url( $list[$i]->link ), esc_url( $list[$i]->thumbnail ), esc_attr( $list[$i]->caption ) );
 				echo '</li>';
 			}
 
@@ -118,7 +118,7 @@ class WordPress_InstaFeed {
 
 						$ret[] = $current;
 					}
-					set_transient( $transient_key, $ret, apply_filters( 'wp_instafeed_stream_cachetime', self::DEFAULT_STREAM_CACHETIME  ) );
+					set_transient( $transient_key, $ret, apply_filters( 'instafeed_stream_cachetime', self::DEFAULT_STREAM_CACHETIME  ) );
 				}
 			}
 		}
@@ -162,7 +162,7 @@ class WordPress_InstaFeed {
 				if ( isset( $omething->data ) && count( $omething->data) ) {
 					$return = $omething->data[0];
 
-					set_transient( $transient_key, $return, apply_filters( 'wp_instafeed_userdata_cachetime', self::DEFAULT_USERDATA_CACHETIME ) );
+					set_transient( $transient_key, $return, apply_filters( 'instafeed_userdata_cachetime', self::DEFAULT_USERDATA_CACHETIME ) );
 				}
 			}
 		}
@@ -175,7 +175,7 @@ class WordPress_InstaFeed {
 			'timeout'     => 10,
 			'redirection' => 5,
 			'httpversion' => '1.1',
-			'user-agent'  => 'WordPress Instafeed' . self::VERSION . '; ' . get_bloginfo( 'url' ),
+			'user-agent'  => 'Instafeed' . self::VERSION . '; ' . get_bloginfo( 'url' ),
 			'blocking'    => true,
 			'headers'     => array(),
 			'cookies'     => array(),
@@ -192,5 +192,5 @@ class WordPress_InstaFeed {
 
 }
 
-new WordPress_InstaFeed;
+new Instafeed;
 

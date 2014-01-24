@@ -25,7 +25,7 @@
 
 	var get_fresh = function ( req_data, $el ) {
 		$.ajax({
-			"url": wp_instafeed.ajaxurl,
+			"url": instafeed.ajaxurl,
 			"data": req_data,
 			"success": function( ret_data ) {
 				update_view( ret_data, $el );
@@ -40,7 +40,7 @@
 		var $el = $( this );
 
 		var req_data = {
-			action: 'wp_instafeed_widgetcontent',
+			action: 'instafeed_widgetcontent',
 			widget: $el.attr('id')
 		};
 
@@ -50,7 +50,7 @@
 
 			var ls_ts = localStorage.getItem( key + '_ts' );
 
-			if ( ls_ts && ( (new Date).getTime() / 1000 ) - ls_ts < wp_instafeed.client_cachetime ) {
+			if ( ls_ts && ( (new Date).getTime() / 1000 ) - ls_ts < instafeed.client_cachetime ) {
 				var ret_data = localStorage.getItem( key );
 				update_view( ret_data, $el );
 			} else {

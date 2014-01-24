@@ -1,4 +1,4 @@
-=== WordPress Instafeed ===
+=== Instafeed ===
 Contributors: bjornjohansen, toringe
 Donate link: http://www.kiva.org
 Tags: instagram, widget, jquery
@@ -34,6 +34,7 @@ Fetch and display the latest Instagrams from either a specified Instagram userna
 = Version 0.1.2 =
 * Added client side caching with localStorage
 * Added filters for modifying cache times
+* Renamed plugin to Instafeed
 
 = Version 0.1.1 =
 * User feed works

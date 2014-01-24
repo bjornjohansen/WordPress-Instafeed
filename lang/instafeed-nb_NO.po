@@ -5,23 +5,23 @@ msgstr ""
 "Project-Id-Version: WordPress Instafeed 0.1.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/wordpress-instafeed\n"
 "POT-Creation-Date: 2014-01-21 21:13:16+00:00\n"
+"PO-Revision-Date: 2014-01-24 14:19+0100\n"
+"Last-Translator: Bjørn Johansen <post@bjornjohansen.no>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: nb_NO\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2014-01-21 22:18+0100\n"
-"Last-Translator: \n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: Poedit 1.6.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: nb_NO\n"
 
 #: widget.php:16
 msgid "Stream of photos from Instagram"
 msgstr "Strøm av bilder fra Instagram"
 
 #: widget.php:33
-msgid "Please configure the WordPress InstaFeed widget"
-msgstr "Vennligst configurer widgeten WordPress InstaFeed"
+msgid "Please configure the InstaFeed widget"
+msgstr "Vennligst configurer widgeten InstaFeed"
 
 #: widget.php:53
 msgid "Title:"

@@ -1,19 +1,19 @@
 <?php
 
-function wp_if_widget_init() {
-	register_widget( 'WordPress_InstaFeed_Widget' );
+function instafeed_widget_init() {
+	register_widget( 'InstaFeed_Widget' );
 }
-add_action( 'widgets_init', 'wp_if_widget_init' );
+add_action( 'widgets_init', 'instafeed_widget_init' );
 
 
-class WordPress_InstaFeed_Widget extends WP_Widget {
+class InstaFeed_Widget extends WP_Widget {
 
 	function __construct() {
 
 		parent::__construct(
-			'wp_if_widget', 
-			__('WP Instafeed Widget', 'wp-instafeed'), 
-			array( 'description' => __( 'Stream of photos from Instagram', 'wp-instafeed' ), ) 
+			'instafeed_widget', 
+			__('Instafeed Widget', 'instafeed'), 
+			array( 'description' => __( 'Stream of photos from Instagram', 'instafeed' ), ) 
 		);
 	}
 
@@ -30,7 +30,7 @@ class WordPress_InstaFeed_Widget extends WP_Widget {
 		}
 
 		if ( ! isset( $instance['instafeed_term'] ) || ! strlen( $instance['instafeed_term'] ) ) {
-			echo sprintf( '<p>%s</p>', __( 'Please configure the WordPress InstaFeed widget', 'wp-instafeed' ) );
+			echo sprintf( '<p>%s</p>', __( 'Please configure the WordPress InstaFeed widget', 'instafeed' ) );
 		}
 
 		if ( isset( $args['after_widget'] ) ) {
@@ -41,7 +41,7 @@ class WordPress_InstaFeed_Widget extends WP_Widget {
 
 	public function form( $instance ) {
 
-		$title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : __( 'Instagram', 'wp-instafeed' );
+		$title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : __( 'Instagram', 'instafeed' );
 		$instafeed_term = isset( $instance[ 'instafeed_term' ] ) ? $instance[ 'instafeed_term' ] : '';
 		$num_entries = isset( $instance[ 'num_entries' ] ) ? intval ( $instance[ 'num_entries' ] ) : '5';
 		if ( $num_entries < 1 ) {
@@ -54,9 +54,9 @@ class WordPress_InstaFeed_Widget extends WP_Widget {
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'instafeed_term' ); ?>"><?php _e( 'Username or tag:', 'wp-instafeed' ); ?></label> 
+			<label for="<?php echo $this->get_field_id( 'instafeed_term' ); ?>"><?php _e( 'Username or tag:', 'instafeed' ); ?></label> 
 			<input class="widefat" id="<?php echo $this->get_field_id( 'instafeed_term' ); ?>" name="<?php echo $this->get_field_name( 'instafeed_term' ); ?>" type="text" value="<?php echo esc_attr( $instafeed_term ); ?>" />
-			<br><span class="desc"><?php _e( 'Input "username" or "#tag"', 'wp-instafeed' ); ?></span>
+			<br><span class="desc"><?php _e( 'Input "username" or "#tag"', 'instafeed' ); ?></span>
 		</p>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'num_entries' ); ?>"><?php _e( 'Number of entries to show:' ); ?></label> 
