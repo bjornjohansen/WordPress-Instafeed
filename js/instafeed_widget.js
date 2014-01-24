@@ -35,7 +35,7 @@
 		});
 	}
 
-	$('.widget_wp_if_widget').each(function() {
+	$('.widget_instafeed_widget').each(function() {
 
 		var $el = $( this );
 

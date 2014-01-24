@@ -106,7 +106,7 @@ class Instafeed {
 						$current = new stdClass();
 						$current->link = $item->link;
 						$current->thumbnail = $item->images->thumbnail->url;
-						/* Found bug in WP transient API. Need workaround. Skip captions for now */
+						/* Found bug in WP transient API. Need workaround. Skip captions for now. TODO: Make patch to core */
 						if ( false && isset( $item->caption->text ) ) {
 							$current->caption = esc_html( $item->caption->text );
 						} else {

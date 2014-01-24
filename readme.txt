@@ -5,7 +5,7 @@ Tags: instagram, widget, jquery
 Author URI: https://leidar.com/
 Requires at least: 3.5
 Stable tag: 0.1.2
-Tested up to: 3.8
+Tested up to: 3.8.1
 License: GPLv2
 
 Stream of photos from Instagram on your WordPress site
