@@ -1,5 +1,5 @@
 === Instafeed ===
-Contributors: bjornjohansen, toringe
+Contributors: bjornjohansen, toringe, joakimandersen
 Donate link: http://www.kiva.org
 Tags: instagram, widget, jquery
 Author URI: https://leidar.com/
