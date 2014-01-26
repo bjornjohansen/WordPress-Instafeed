@@ -3,7 +3,7 @@
 Plugin Name: Instafeed
 Plugin URI: https://github.com/bjornjohansen/WordPress-Instafeed
 Description: Stream of photos from Instagram on your WordPress site
-Version: 0.1.2.1
+Version: 0.1.3
 Author: Leidar
 Author URI: http://leidar.com/
 Text Domain: instafeed
@@ -30,12 +30,12 @@ require_once 'widget.php';
 
 class Instafeed {
 
-	const VERSION = '0.1.2.1';
+	const VERSION = '0.1.3';
 	const CLIENT_ID = '6409bc9c964348899c3ae1b9091965b9';
 
-	const DEFAULT_CLIENT_CACHETIME = 600;
-	const DEFAULT_STREAM_CACHETIME = 3600;
-	const DEFAULT_USERDATA_CACHETIME = 86400;
+	const DEFAULT_CLIENT_CACHETIME = 600;     // filter: instafeed_client_cachetime
+	const DEFAULT_STREAM_CACHETIME = 3600;    // filter: instafeed_stream_cachetime
+	const DEFAULT_USERDATA_CACHETIME = 86400; // filter: instafeed_userdata_cachetime
 
 	function __construct() {
 		add_action( 'wp_ajax_instafeed_widgetcontent', array( $this, 'widgetcontent_callback' ) );
@@ -73,15 +73,16 @@ class Instafeed {
 
 		if ( count( $list ) ) {
 
-			echo '<ul class="instafeed_widget_list">';
+			echo apply_filters( 'instafeed_widget_list_open', '<ul class="instafeed_widget_list">' );
 
 			for ( $i = 0, $c = min( $widget_options[ 'num_entries' ], count( $list ) ); $i < $c; $i++ ) {
-				echo '<li class="instafeed_widget_list_item">';
+				echo apply_filters( 'instafeed_widget_list_item_open', '<li class="instafeed_widget_list_item">' );
+				// TODO: Come up with a good, flexible solution for applying filters on the next line. Split it maybe?
 				echo sprintf( '<a href="%s" target="_blank" class="instafeed_widget_list_item_link"><img src="%s" alt="%s"></a>', esc_url( $list[$i]->link ), esc_url( $list[$i]->thumbnail ), esc_attr( $list[$i]->caption ) );
-				echo '</li>';
+				echo apply_filters( 'instafeed_widget_list_item_close', '</li>' );
 			}
 
-			echo '<ul>';
+			echo apply_filters( 'instafeed_widget_list_close', '</ul>' );
 		}
 
 		exit;
