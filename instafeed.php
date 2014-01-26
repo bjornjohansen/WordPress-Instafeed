@@ -3,7 +3,7 @@
 Plugin Name: Instafeed
 Plugin URI: https://github.com/bjornjohansen/WordPress-Instafeed
 Description: Stream of photos from Instagram on your WordPress site
-Version: 0.1.2
+Version: 0.1.2.1
 Author: Leidar
 Author URI: http://leidar.com/
 Text Domain: instafeed
@@ -30,7 +30,7 @@ require_once 'widget.php';
 
 class Instafeed {
 
-	const VERSION = '0.1.2';
+	const VERSION = '0.1.2.1';
 	const CLIENT_ID = '6409bc9c964348899c3ae1b9091965b9';
 
 	const DEFAULT_CLIENT_CACHETIME = 600;

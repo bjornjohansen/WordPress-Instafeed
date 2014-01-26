@@ -4,7 +4,7 @@ Donate link: http://www.kiva.org
 Tags: instagram, widget, jquery
 Author URI: https://leidar.com/
 Requires at least: 3.5
-Stable tag: 0.1.2
+Stable tag: 0.1.2.1
 Tested up to: 3.8.1
 License: GPLv2
 
@@ -36,6 +36,10 @@ Fetch and display the latest Instagrams from either a specified Instagram userna
 3. HTML output
 
 == Changelog ==
+
+= Version 0.1.2.1 =
+* Changed default num of entires to 6
+* Added banner for wordpress.org repo
 
 = Version 0.1.2 =
 * Added client side caching with localStorage
