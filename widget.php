@@ -43,7 +43,7 @@ class InstaFeed_Widget extends WP_Widget {
 
 		$title = isset( $instance[ 'title' ] ) ? $instance[ 'title' ] : __( 'Instagram', 'instafeed' );
 		$instafeed_term = isset( $instance[ 'instafeed_term' ] ) ? $instance[ 'instafeed_term' ] : '';
-		$num_entries = isset( $instance[ 'num_entries' ] ) ? intval ( $instance[ 'num_entries' ] ) : '5';
+		$num_entries = isset( $instance[ 'num_entries' ] ) ? intval ( $instance[ 'num_entries' ] ) : 6;
 		if ( $num_entries < 1 ) {
 			$num_entries = 1;
 		}
