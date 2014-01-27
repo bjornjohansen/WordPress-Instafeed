@@ -2,7 +2,7 @@
 Contributors: bjornjohansen, toringe, joakimandersen
 Donate link: http://www.kiva.org
 Tags: instagram, widget, jquery
-Author URI: https://leidar.com/
+Author URI: http://leidar.com/
 Requires at least: 3.5
 Stable tag: 0.1.3
 Tested up to: 3.8.1
@@ -18,6 +18,7 @@ Fetch and display the latest Instagrams from either a specified Instagram userna
 * No OAuth required.
 * Works on HTTPS.
 * No CSS provided (yet). Do what you want, create a slider, lightbox gallery, whatever …
+* Full styling freedom
 * Optimized for full page caching. Widget content is fetched via an AJAX GET request for easy cache tuning.
 * Results from Instagram is cached on server for fast loading.
 * Results from server is cached in browser for super-fast loading (and less stress on server) on repeated/multiple page views.
